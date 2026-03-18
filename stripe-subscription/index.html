@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flexible Financing options</title>
+    <link rel="icon" href="s-favicon.svg" type="image/svg+xml">
     <!-- Fonts matching the target aesthetic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,10 +91,31 @@
                         
                         <!-- Embedded Stripe Payment Form -->
                         <div id="payment-section" style="display: none; margin-top: 1.5rem; text-align: left;">
-                            <h4 class="calc-title" style="text-align: left; margin-bottom: 1rem;">ENTER PAYMENT DETAILS</h4>
-                            <div id="card-element" style="padding: 1rem; border: 1px solid #E5E7EB; background: #fff; border-radius: 8px; margin-bottom: 0.5rem;"></div>
+                            <h4 class="calc-title" style="text-align: left; margin-bottom: 1.5rem; color: var(--navy-blue);">ENTER PAYMENT DETAILS</h4>
+                            
+                            <div class="billing-details" style="display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1.5rem;">
+                                <!-- Contact Info -->
+                                <div style="display: flex; gap: 0.8rem;">
+                                    <input type="text" id="custName" placeholder="Full legal name" required style="flex: 1; min-width: 0; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; outline:none;">
+                                    <input type="tel" id="custPhone" placeholder="Phone number" required style="flex: 1; min-width: 0; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; outline:none;">
+                                </div>
+                                <input type="email" id="custEmail" placeholder="Email address" required style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; outline:none;">
+                                
+                                <!-- Billing Address -->
+                                <input type="text" id="custAddress" placeholder="Street address" style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; outline:none;">
+                                <div style="display: flex; gap: 0.8rem;">
+                                    <input type="text" id="custCity" placeholder="City" style="flex: 2; min-width: 0; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; outline:none;">
+                                    <input type="text" id="custState" placeholder="State" style="flex: 1; min-width: 0; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; outline:none;">
+                                    <input type="text" id="custZip" placeholder="ZIP code" style="flex: 1; min-width: 0; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; outline:none;">
+                                </div>
+                            </div>
+
+                            <div id="card-element" style="padding: 1.2rem 1rem; border: 1px solid #E5E7EB; background: #fff; border-radius: 8px; margin-bottom: 0.5rem;"></div>
                             <div id="payment-error" style="color: #d9534f; font-size: 0.85rem; margin-bottom: 1rem;"></div>
-                            <button id="submit-payment" class="btn btn-navy btn-full">Submit Payment</button>
+                            <div style="display: flex; gap: 10px;">
+                                <button id="cancel-payment" class="btn btn-border" style="width: 120px;">Back</button>
+                                <button id="submit-payment" class="btn btn-navy" style="flex: 1;">Submit Payment</button>
+                            </div>
                         </div>
                     </div>
                 </div>

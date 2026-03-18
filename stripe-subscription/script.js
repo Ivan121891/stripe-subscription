@@ -145,12 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
             cardElement.mount('#card-element');
         } else {
             document.getElementById('card-element').innerHTML = `
-                <div style="display:flex; gap:10px; font-family: sans-serif;">
-                    <input type="text" placeholder="Card number" value="4242  4242  4242  4242" disabled style="flex: 1; min-width: 0; padding: 10px; border: 1px solid #E5E7EB; border-radius: 5px; background: #FAFAFB; color: #888;">
-                    <input type="text" placeholder="MM/YY" value="12 / 26" disabled style="width: 70px; padding: 10px; border: 1px solid #E5E7EB; border-radius: 5px; background: #FAFAFB; color: #888;">
-                    <input type="text" placeholder="CVC" value="123" disabled style="width: 60px; padding: 10px; border: 1px solid #E5E7EB; border-radius: 5px; background: #FAFAFB; color: #888;">
+                <div style="display:flex; flex-direction:column; gap:0.8rem; font-family: var(--font-body, sans-serif);">
+                    <input type="text" placeholder="Name on card" style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 0.95rem; outline:none; background: #fff;">
+                    <div style="display:flex; gap:0.8rem;">
+                        <input type="tel" placeholder="Card number" maxlength="19" style="flex: 1; min-width: 0; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 0.95rem; outline:none; background: #fff;">
+                        <input type="tel" placeholder="MM / YY" maxlength="5" style="width: 90px; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 0.95rem; text-align:center; outline:none; background: #fff;">
+                        <input type="tel" placeholder="CVC" maxlength="4" style="width: 80px; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 0.95rem; text-align:center; outline:none; background: #fff;">
+                    </div>
                 </div>
-                <div style="font-size: 0.75rem; color: #888; text-align: center; margin-top: 8px;">(Local File Preview: This input will activate securely once hosted online)</div>
+                <div style="font-size: 0.75rem; color: #888; text-align: center; margin-top: 10px;">(Local Demo Mode: Card fields are unlocked for your visual presentation)</div>
             `;
             document.getElementById('card-element').style.border = 'none';
             document.getElementById('card-element').style.padding = '0';
@@ -160,8 +163,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle Payment Submission
     const submitBtn = document.getElementById('submit-payment');
     const paymentError = document.getElementById('payment-error');
+    const cancelBtn = document.getElementById('cancel-payment');
+
+    cancelBtn.addEventListener('click', () => {
+        // Reverse UI state back to the tier selection
+        document.getElementById('payment-section').style.display = 'none';
+        continueBtn.parentElement.style.display = 'block';
+        continueBtn.disabled = false;
+        continueBtn.textContent = 'Apply & Continue';
+        
+        // Clean up Stripe element instance to prevent duplicates on re-entry
+        if (cardElement && typeof cardElement.destroy === 'function') {
+            cardElement.destroy();
+            cardElement = null;
+        }
+    });
 
     submitBtn.addEventListener('click', async () => {
+        // Collect demographic and billing values
+        const custName = document.getElementById('custName').value.trim() || 'Financing Customer';
+        const custEmail = document.getElementById('custEmail').value.trim() || 'customer@example.com';
+        const custPhone = document.getElementById('custPhone').value.trim() || '';
+        const custAddress = document.getElementById('custAddress').value.trim() || '';
+        const custCity = document.getElementById('custCity').value.trim() || '';
+        const custState = document.getElementById('custState').value.trim() || '';
+        const custZip = document.getElementById('custZip').value.trim() || '';
+
         submitBtn.disabled = true;
         submitBtn.textContent = 'Processing Payment...';
         paymentError.textContent = '';
@@ -178,7 +205,15 @@ document.addEventListener('DOMContentLoaded', () => {
             payment_method: {
                 card: cardElement,
                 billing_details: {
-                    name: 'Financing Customer', // Ideally collected from an input field
+                    name: custName,
+                    email: custEmail,
+                    phone: custPhone,
+                    address: {
+                        line1: custAddress,
+                        city: custCity,
+                        state: custState,
+                        postal_code: custZip
+                    }
                 }
             }
         });
