@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexible Financing options</title>
+    <!-- Fonts matching the target aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main>
+        <section class="subscription-hero">
+            <div class="sub-hero-image" style="background-image: url('https://images.unsplash.com/photo-1608283086552-320d3ba37775?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNraW5jYXJlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=80');"></div>
+            
+            <div class="sub-hero-content">
+                <div class="sub-content-inner">
+                    <h1 class="sub-maintitle">Financing</h1>
+                    <h2 class="sub-title">Flexible ways to pay for your subscription.</h2>
+                    <p class="sub-desc">
+                        We offer Subscription Auto Pay, providing patients with a flexible and convenient way to handle payments for their routine subscription. With this automated model, clients can spread out the cost of their desired services, breaking down the total into manageable weekly or monthly increments. 
+                    </p>
+                    <p class="sub-desc">
+                        This makes it easier to fit high-quality preventative treatments into any budget, allowing you to prioritize your self-care seamlessly.
+                    </p>
+
+                    <ul class="sub-features">
+                        <li>
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 6L9 17l-5-5" stroke="#1A0D3E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <strong>No hard credit checks</strong>, ever
+                        </li>
+                        <li>
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 6L9 17l-5-5" stroke="#1A0D3E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <strong>True 0% APR</strong> options available
+                        </li>
+                        <li>
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 6L9 17l-5-5" stroke="#1A0D3E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Interest-bearing plans with APRs as low as 5.99%
+                        </li>
+                        <li>
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 6L9 17l-5-5" stroke="#1A0D3E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Up to <strong>$50,000</strong> approvals
+                        </li>
+                        <li>
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 6L9 17l-5-5" stroke="#1A0D3E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <strong>No hidden fees</strong>
+                        </li>
+                    </ul>
+
+                    <div class="sub-calculator-card">
+                        <h3 class="calc-title">SEE AN EXAMPLE OF WHAT YOU COULD PAY</h3>
+                        <div class="calc-input-wrapper">
+                            <span class="calc-label">Example payments for</span>
+                            <div class="calc-input-box">
+                                <span class="calc-currency">$</span>
+                                <input type="number" id="calcAmount" value="750" min="50" step="10">
+                            </div>
+                        </div>
+
+                        <button id="calcGetOptionsBtn" class="btn btn-navy btn-full">Get personalized options</button>
+
+                        <div id="calcResults" class="calc-results" style="display: none;">
+                            <!-- Payment options will be injected here via JS -->
+                        </div>
+                        <p id="calcDisclaimer" class="calc-disclaimer" style="display: none;">These are estimated payments. Final terms subject to approval.</p>
+                        
+                        <div class="calc-actions" id="calcActions" style="display: none;">
+                            <button id="calcContinueBtn" class="btn btn-border btn-full" disabled>Apply & Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sub-faq-section container">
+            <h2 class="faq-section-title">Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">What does "personalized options" mean? <span class="faq-icon">+</span></button>
+                    <div class="faq-answer">
+                        <p>Personalized options give you a custom breakdown of different payment plans—ranging from weekly to monthly terms—based uniquely on your treatment cost. It allows you to choose a schedule that comfortably fits your budget.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Is checking my personalized options binding? <span class="faq-icon">+</span></button>
+                    <div class="faq-answer">
+                        <p>Not at all! Getting your personalized options is simply a tool to help you explore potential payment plans. You are under no obligation to proceed until you officially authorize a payment at checkout.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Are there hidden fees if I choose a payment plan? <span class="faq-icon">+</span></button>
+                    <div class="faq-answer">
+                        <p>No, the calculated options display clearly what you will pay upfront and over time. We pride ourselves on transparent financing so you can plan with confidence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container" style="text-align:center; padding: 2rem 0; color: #777; font-size: 0.9rem;">
+            <p>&copy; 2026 Standalone Financing Demo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
