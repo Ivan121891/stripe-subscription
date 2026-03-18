@@ -2,6 +2,12 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Initialize Stripe using the provided Live Publishable Key
+    const stripe = Stripe('pk_live_51TC4SELaBFlnvJbWczLT71J1MU0txs693i5hasLyXyDlDZqNFwpdcxWrFD60IpV3lncUYED7FbCOXeJk1TGEhxvB00xPuVEMSd');
+    let elements;
+    let cardElement;
+    let subscriptionClientSecret;
+
     // --- Calculator Logic ---
     const calcAmount = document.getElementById('calcAmount');
     const getOptionsBtn = document.getElementById('calcGetOptionsBtn');
@@ -80,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Continue action (Stripe Checkout Integration)
+    // Continue action (Trigger Subscription and show Card form)
     continueBtn.addEventListener('click', async () => {
         if (!selectedPlan) return;
         
@@ -89,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         continueBtn.textContent = 'Processing...';
 
         try {
-            const response = await fetch('http://localhost:4242/create-checkout-session', {
+            const response = await fetch('http://localhost:4242/create-subscription', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -112,14 +118,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Redirect securely to Stripe's hosted Checkout Page
-            window.location.href = session.url;
+            subscriptionClientSecret = session.clientSecret;
+            
+            // Hide the apply button
+            continueBtn.parentElement.style.display = 'none';
+
+            // Show the payment section
+            const paymentSection = document.getElementById('payment-section');
+            paymentSection.style.display = 'block';
+
+            // Mount the Stripe element
+            elements = stripe.elements({ clientSecret: subscriptionClientSecret });
+            cardElement = elements.create('card');
+            cardElement.mount('#card-element');
 
         } catch (error) {
             console.error('Error:', error);
             alert('Failed to connect to the checkout server.');
             continueBtn.disabled = false;
             continueBtn.textContent = 'Apply & Continue';
+        }
+    });
+
+    // Handle Payment Submission
+    const submitBtn = document.getElementById('submit-payment');
+    const paymentError = document.getElementById('payment-error');
+
+    submitBtn.addEventListener('click', async () => {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Processing Payment...';
+        paymentError.textContent = '';
+
+        const { error, paymentIntent } = await stripe.confirmCardPayment(subscriptionClientSecret, {
+            payment_method: {
+                card: cardElement,
+                billing_details: {
+                    name: 'Financing Customer', // Ideally collected from an input field
+                }
+            }
+        });
+
+        if (error) {
+            paymentError.textContent = error.message;
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Payment';
+        } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+            document.getElementById('payment-section').innerHTML = '<h3 style="color: #2e7d32; text-align:center;">Payment Successful!</h3><p style="text-align:center; margin-top: 1rem; color: #555;">Your financing subscription has been confirmed and activated.</p>';
         }
     });
 
