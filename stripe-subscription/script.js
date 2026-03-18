@@ -27,11 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Standard tier logic based on total amount
     const tiers = [
-        { label: '6 Weeks (0% APR)', interval: 'week', intervalCount: 1, rate: 0, formatter: (val) => `$${(val/6).toFixed(2)} / wk`, getPerInterval: (val) => val/6 },
-        { label: '12 Weeks (0% APR)', interval: 'week', intervalCount: 1, rate: 0, formatter: (val) => `$${(val/12).toFixed(2)} / wk`, getPerInterval: (val) => val/12 },
-        { label: '3 Months (0% APR)', interval: 'month', intervalCount: 1, rate: 0, formatter: (val) => `$${(val/3).toFixed(2)} / mo`, getPerInterval: (val) => val/3 },
-        { label: '6 Months (0% APR)', interval: 'month', intervalCount: 1, rate: 0, formatter: (val) => `$${(val/6).toFixed(2)} / mo`, getPerInterval: (val) => val/6 },
-        { label: '12 Months (5.99% APR)', interval: 'month', intervalCount: 1, rate: 0.0599, formatter: (val) => `$${((val * 1.0599)/12).toFixed(2)} / mo`, getPerInterval: (val) => (val * 1.0599)/12 }
+        { label: 'Biweekly', interval: 'week', intervalCount: 2, formatter: (val) => `$${(val/4).toFixed(2)} / biweekly`, getPerInterval: (val) => val/4 },
+        { label: '3 Months', interval: 'month', intervalCount: 1, formatter: (val) => `$${(val/3).toFixed(2)} / mo`, getPerInterval: (val) => val/3 },
+        { label: '4 Months', interval: 'month', intervalCount: 1, formatter: (val) => `$${(val/4).toFixed(2)} / mo`, getPerInterval: (val) => val/4 },
+        { label: '5 Months', interval: 'month', intervalCount: 1, formatter: (val) => `$${(val/5).toFixed(2)} / mo`, getPerInterval: (val) => val/5 },
+        { label: '6 Months', interval: 'month', intervalCount: 1, formatter: (val) => `$${(val/6).toFixed(2)} / mo`, getPerInterval: (val) => val/6 },
+        { label: '7 Months', interval: 'month', intervalCount: 1, formatter: (val) => `$${(val/7).toFixed(2)} / mo`, getPerInterval: (val) => val/7 },
+        { label: '12 Months', interval: 'month', intervalCount: 1, formatter: (val) => `$${(val/12).toFixed(2)} / mo`, getPerInterval: (val) => val/12 }
     ];
 
     getOptionsBtn.addEventListener('click', () => {
@@ -148,7 +150,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div style="display:flex; flex-direction:column; gap:0.8rem; font-family: var(--font-body, sans-serif);">
                     <input type="text" placeholder="Name on card" style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 0.95rem; outline:none; background: #fff;">
                     <div style="display:flex; gap:0.8rem;">
-                        <input type="tel" placeholder="Card number" maxlength="19" style="flex: 1; min-width: 0; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 0.95rem; outline:none; background: #fff;">
+                        <div style="position: relative; flex: 1; min-width: 0;">
+                            <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #ccc; display: flex;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                            </span>
+                            <input type="tel" placeholder="Card number" maxlength="19" style="width: 100%; padding: 0.8rem 6rem 0.8rem 2.6rem; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 0.95rem; outline:none; background: #fff;">
+                            <div style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: #011E13; color: white; padding: 5px 10px; border-radius: 6px; font-weight: 500; font-size: 0.8rem; display: flex; align-items: center; gap: 4px; font-family: sans-serif;">
+                                Autofill <span style="color: #00D66F; font-weight: 700;">link</span>
+                            </div>
+                        </div>
                         <input type="tel" placeholder="MM / YY" maxlength="5" style="width: 90px; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 0.95rem; text-align:center; outline:none; background: #fff;">
                         <input type="tel" placeholder="CVC" maxlength="4" style="width: 80px; padding: 0.8rem 1rem; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 0.95rem; text-align:center; outline:none; background: #fff;">
                     </div>
