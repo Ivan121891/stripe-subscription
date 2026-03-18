@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let stripe = null;
     try {
         if (window.location.protocol.startsWith('http')) {
-            stripe = Stripe('pk_live_51TC4SELaBFlnvJbWczLT71J1MU0txs693i5hasLyXyDlDZqNFwpdcxWrFD60IpV3lncUYED7FbCOXeJk1TGEhxvB00xPuVEMSd');
+            stripe = Stripe('pk_live_51TCQACGjRXXBgdmTzfQQWRX5vOnTGmGwxUeQQeDonmx848L6wTsvMOEDIulNdlsEQlzVc2uF4HhruOoSDhNDEmRf00fclFRvIZ');
         }
     } catch (e) {
         // Silently bypass initialization if blocked
